@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Weather app
+{% endblock %}
+
+{% block content %}
+    <h1>Latest weather information</h1>
+    {% if tasks %}
+    {% for el in tasks %}
+        <div class="alert alert-warning mt-2">
+            <h3>{{el.city}}</h3>
+            <p>{{el.temperature}}</p>
+        </div>
+    {% endfor %}
+    {% else %}
+        <p>There is no information about the weather</p>
+    {% endif %}
+{% endblock %}

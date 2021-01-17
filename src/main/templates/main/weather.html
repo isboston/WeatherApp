@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Information about weather
+{% endblock %}
+
+{% block content %}
+<h1>Add information about the weather</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.city }}<br>
+    {{ form.temperature }}<br>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    <span>{{ error }}</span>
+
+</form>
+{% if tasks %}
+{% for el in tasks %}
+<div class="alert alert-warning mt-2">
+    <h3>{{el.city}}</h3>
+    <p>{{el.temperature}}</p>
+</div>
+{% endfor %}
+{% else %}
+<p>There is no information about the weather</p>
+{% endif %}
+{% endblock %}
