@@ -11,5 +11,5 @@ class Task(models.Model):
         return self.city
 
     class Meta:
-        verbose_name = 'indicator'
-        verbose_name_plural = 'indicators'
+        verbose_name = 'indikator'
+        verbose_name_plural = 'indikators'
