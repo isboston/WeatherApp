@@ -5,7 +5,7 @@ Information about weather
 {% endblock %}
 
 {% block content %}
-<h1>Add information about the weather</h1>
+<h2>Add information about the weather</h2>
 <form method="POST">
     {% csrf_token %}
     {{ form.city }}<br>
