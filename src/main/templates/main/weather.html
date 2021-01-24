@@ -10,10 +10,8 @@ Information about weather
     {% csrf_token %}
     {{ form.city }}<br>
     {{ form.temperature }}<br>
-
     <button type="submit" class="btn btn-success">Submit</button>
     <span>{{ error }}</span>
-
 </form>
 {% if tasks %}
 {% for el in tasks %}

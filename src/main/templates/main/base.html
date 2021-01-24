@@ -41,18 +41,39 @@
         <ul class="navbar-nav mr-auto">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    {% if not request.user.is_authenticated %}
     <li class="nav-item active">
-        <a class="nav-link" href="accounts/login">Log In</a>
+        <a class="nav-link" href="{% url 'login' %}">Log In</a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="/">Sign Up</a>
+        <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
     </li>
+    {% endif %}
     <li class="nav-item active">
-        <a class="nav-link" href="/">Log Out</a>
+        {% if request.user.is_authenticated %}<span class="navbar text">Hello, {{ request.user.username }}</span>
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+        {% endif %}
     </li>
     </ul>
     </div>
 </nav>
+
+{% if messages %}
+
+{% for message in messages %}
+{% if message.tags == 'error' %}
+<div class="alert alert-danger" role="alert">
+    {{ message }}
+</div>
+{% else %}
+<div class="alert alert-{{ message.tags }}" role="alert">
+    {{ message }}
+</div>
+{% endif %}
+
+{% endfor %}
+
+{% endif %}
 
 <div class="container mt-5">
     <div class="row">
