@@ -1,23 +1,19 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Task
+from .models import Task, Location
 
 
 class TaskForm(forms.ModelForm):
+    city = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control', 'placeholder': 'Please enter the city'}))
+    temperature = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control', 'placeholder': 'Please enter the temperature'}))
+
     class Meta:
         model = Task
-        fields = ["city", "temperature"]
-        widgets = {
-            "city": forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter the city'
-            }),
-            "temperature": forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter the temperature'
-            }),
-        }
+        fields = ('city', 'temperature', 'location')
+
 
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -28,6 +24,7 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

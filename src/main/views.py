@@ -5,8 +5,6 @@ from django.contrib import messages
 from .models import Task
 
 
-
-
 def index(request):
     tasks = Task.objects.all()
     return render(request, 'main/index.html', {'tasks': tasks})
@@ -48,7 +46,6 @@ def register(request):
     return render(request, 'main/register.html', {'form': form})
 
 
-
 def user_login(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
@@ -60,6 +57,11 @@ def user_login(request):
         form = UserLoginForm()
     return render(request, 'main/login.html', {'form': form})
 
+
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+def search(request):
+    return render(request, 'main/search.html')

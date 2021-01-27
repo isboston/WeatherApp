@@ -10,16 +10,18 @@ Information about weather
     {% csrf_token %}
     {{ form.city }}<br>
     {{ form.temperature }}<br>
-    <button type="submit" class="btn btn-success">Submit</button>
+    {{ form.location }}<br>
+    <br><button type="submit" class="btn btn-success">Submit</button>
     <span>{{ error }}</span>
 </form>
 {% if tasks %}
-{% for el in tasks %}
+    {% for el in tasks %}
 <div class="alert alert-warning mt-2">
     <h3>{{el.city}}</h3>
     <p>{{el.temperature}}</p>
+    <p>{{el.location}}</p>
 </div>
-{% endfor %}
+    {% endfor %}
 {% else %}
 <p>There is no information about the weather</p>
 {% endif %}
