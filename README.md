@@ -1,13 +1,10 @@
 # weather app
 
-My final project - weather app
+My final project - Weather app
 
 ## Features
 - sending emails (order confirmation, user verification)
-- authentication (allauth)
-- signals
-- pagination
-- time restriction on ordering
+
 
 ## Installation
 
@@ -39,13 +36,5 @@ To send order confirmations use:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ```
 
-## Notes
-
-Products images are placed:
-```bash
-/src/static/media/products_images
-```
-
 ## Built With
 - Django
-- Bootstrap
