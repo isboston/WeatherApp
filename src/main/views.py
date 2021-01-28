@@ -1,7 +1,9 @@
 from .forms import TaskForm, UserRegisterForm, UserLoginForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
+from django.core.mail import send_mail
 from django.contrib import messages
+from src.settings import EMAIL_HOST_USER
 from .models import Task
 
 
@@ -37,7 +39,18 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'You have successfully registered')
+            mail = send_mail(
+                'Weather registered',
+                'You have successfully registered on the WEATHERAPP',
+                EMAIL_HOST_USER,
+                ['itvibn@mail.ru'],  # change mail
+                fail_silently=False,
+            )
+
+            if mail:
+                messages.success(request, 'You have successfully registered')
+            else:
+                messages.error(request, 'Sending error')
             return redirect('login')
         else:
             messages.error(request, 'Registration error')
