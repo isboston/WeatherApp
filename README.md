@@ -1,4 +1,4 @@
-# weather app
+# Weather app
 
 My final project - Weather app
 
@@ -38,3 +38,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ## Built With
 - Django
+- PostgresSQL
