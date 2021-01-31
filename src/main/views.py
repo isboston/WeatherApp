@@ -7,6 +7,9 @@ from src.settings import EMAIL_HOST_USER
 from .models import Task
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import TaskListSerializer
 
 
 class Search(ListView):
@@ -36,7 +39,7 @@ def weather(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            redirect('index')
+            return redirect('index')
         else:
             error = 'incorrect input'
 
@@ -92,3 +95,10 @@ def user_logout(request):
 
 def search(request):
     return render(request, 'main/search.html')
+
+
+class TaskView(APIView):
+    def get(self, request):
+        task = Task.objects.all()
+        serializer = TaskListSerializer(task, many=True)
+        return Response(serializer.data)

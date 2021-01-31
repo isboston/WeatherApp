@@ -10,13 +10,8 @@ class Rainfall(models.Model):
         ('Fog', 'Fog'),
         ('Frost', 'Frost'),
     ]
-    degree_of_strength = [
-        ('Light', 'Light'),
-        ('Medium', 'Medium'),
-        ('Strong', 'Strong'),
-    ]
     type = models.CharField(max_length=30, null=True, choices=type_rainfall)
-    degree_of_strength = models.CharField(max_length=30, null=True, choices=degree_of_strength)
+    strength = models.ForeignKey('Strength', null=True, on_delete=models.PROTECT, verbose_name='strength')
 
     def __str__(self):
         return self.type
@@ -25,6 +20,23 @@ class Rainfall(models.Model):
         verbose_name = 'rainfall'
         verbose_name_plural = 'rainfalls'
         ordering = ['-type']
+
+
+class Strength(models.Model):
+    degree_of_strength = [
+        ('Light', 'Light'),
+        ('Medium', 'Medium'),
+        ('Strong', 'Strong'),
+    ]
+    degree = models.CharField(max_length=30, null=True, choices=degree_of_strength)
+
+    def __str__(self):
+        return self.degree
+
+    class Meta:
+        verbose_name = 'strength'
+        verbose_name_plural = 'strengths'
+        ordering = ['-degree']
 
 
 class Location(models.Model):
@@ -59,7 +71,8 @@ class Task(models.Model):
     temperature = models.CharField('temperature', max_length=30)
     date_pub = models.DateTimeField(auto_now_add=True)
     location = models.ForeignKey(Location, null=True, on_delete=models.PROTECT, verbose_name='location')
-    rainfall = models.ForeignKey(Rainfall, null=True, on_delete=models.PROTECT, verbose_name='rainfall')
+    rainfall = models.ForeignKey(Rainfall, null=True, on_delete=models.PROTECT, blank=True)
+    strength = models.ForeignKey(Strength, null=True, on_delete=models.PROTECT, blank=True)
 
     def __str__(self):
         return self.city

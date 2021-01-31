@@ -12,7 +12,7 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('city', 'temperature', 'location', 'rainfall')
+        fields = ('city', 'temperature', 'location', 'rainfall', 'strength')
 
 
 class UserRegisterForm(UserCreationForm):
