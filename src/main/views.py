@@ -5,6 +5,20 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from src.settings import EMAIL_HOST_USER
 from .models import Task
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+
+
+class Search(ListView):
+    paginate_by = 3
+
+    def get_queryset(self):
+        return Task.objects.filter(city__icontains=self.request.GET.get('q'))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context
 
 
 def index(request):
@@ -12,8 +26,8 @@ def index(request):
     return render(request, 'main/index.html', {'tasks': tasks})
 
 
-def about(request):
-    return render(request, 'main/about.html')
+class About(TemplateView):
+    template_name = "main/about.html"
 
 
 def weather(request):

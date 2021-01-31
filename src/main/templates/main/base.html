@@ -23,32 +23,32 @@
             <a href="weather">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add information about
                     weather
-                </button>
-            <div>
+                </button></a>
         </ul>
     </div>
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        </form>
-        <ul class="navbar-nav mr-auto">
-            <a class="search-button" href="{% url 'search' %}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                Search</button></a>
-    {% if not request.user.is_authenticated %}
-    <li class="nav-item active">
-        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-    </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
-    </li>
-    {% endif %}
-    <li class="nav-item active">
-        {% if request.user.is_authenticated %}
-    <li class="nav-item">
-        <a class="nav-link">Hello, {{ request.user.username }}!</a>
-    </li>
-    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-    {% endif %}
-    </li>
+    <form action="{% url 'search' %}" method="get" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Enter your city..." name='q' aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                Search
+            </button>
+    </form>
+    <ul class="navbar-nav mr-auto">
+        {% if not request.user.is_authenticated %}
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+        </li>
+        {% endif %}
+        <li class="nav-item active">
+            {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link">Hello, {{ request.user.username }}!</a>
+        </li>
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+        {% endif %}
+        </li>
     </ul>
     </div>
 </nav>

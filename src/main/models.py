@@ -3,15 +3,28 @@ from django.db import models
 
 # Create your models here.
 class Rainfall(models.Model):
-    name = models.CharField('Name', max_length=30)
+    type_rainfall = [
+        ('Rain', 'Rain'),
+        ('Hailstorm', 'Hailstorm'),
+        ('Snow', 'Snow'),
+        ('Fog', 'Fog'),
+        ('Frost', 'Frost'),
+    ]
+    degree_of_strength = [
+        ('Light', 'Light'),
+        ('Medium', 'Medium'),
+        ('Strong', 'Strong'),
+    ]
+    type = models.CharField(max_length=30, null=True, choices=type_rainfall)
+    degree_of_strength = models.CharField(max_length=30, null=True, choices=degree_of_strength)
 
     def __str__(self):
-        return self.name
+        return self.type
 
     class Meta:
         verbose_name = 'rainfall'
         verbose_name_plural = 'rainfalls'
-        ordering = ['-name']
+        ordering = ['-type']
 
 
 class Location(models.Model):

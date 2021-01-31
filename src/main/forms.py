@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Task, Location
+from .models import Task
 
 
 class TaskForm(forms.ModelForm):
@@ -12,7 +12,7 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('city', 'temperature', 'location')
+        fields = ('city', 'temperature', 'location', 'rainfall')
 
 
 class UserRegisterForm(UserCreationForm):
