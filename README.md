@@ -39,8 +39,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ## Built With
 - Django
-<<<<<<< HEAD
 - PostgreSQL
-=======
-- PostgresSQL
->>>>>>> 01f0d279f9e22e319456cda0ec9e6e05a04d9c51
