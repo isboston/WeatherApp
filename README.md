@@ -3,7 +3,8 @@
 My final project - Weather app
 
 ## Features
-- sending emails (order confirmation, user verification)
+- sending emails (user verification)
+- information about weather
 
 
 ## Installation
@@ -38,3 +39,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ## Built With
 - Django
+- PostgreSQL

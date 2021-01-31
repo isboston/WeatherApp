@@ -1,5 +1,5 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block title %}
 Weather app
 {% endblock %}
@@ -11,6 +11,9 @@ Weather app
 <div class="alert alert-warning mt-2">
     <h3>{{el.city}}</h3>
     <h4>{{el.temperature}}°</h4>
+    {% if el.rainfall == "Snow" %}
+    <img src="{% static 'images/Snow.png' %}">
+    {% endif %}
     <h6>{{el.rainfall}}({{el.strength}})</h6>
     <h6>{{el.date_pub}}, {{el.location}}</h6>
 </div>
