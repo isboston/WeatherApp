@@ -11,10 +11,19 @@ Weather app
 <div class="alert alert-warning mt-2">
     <h3>{{el.city}}</h3>
     <h4>{{el.temperature}}°</h4>
-    {% if el.rainfall == "Snow" %}
+    {% if el.rainfall.type == 'Snow' %}
     <img src="{% static 'images/Snow.png' %}">
+    {% elif el.rainfall.type == 'Rain' %}
+    <img src="{% static 'images/Rain.png' %}">
+    {% elif el.rainfall.type == 'Hailstorm' %}
+    <img src="{% static 'images/Hailstorm.png' %}">
+    {% elif el.rainfall.type == 'Fog' %}
+    <img src="{% static 'images/Fog.png' %}">
+    {% elif el.rainfall.type == 'Frost' %}
+    <img src="{% static 'images/Frost.png' %}">
     {% endif %}
-    <h6>{{el.rainfall}}({{el.strength}})</h6>
+
+    <h6>{{el.rainfall}}&nbsp;({{el.strength}})</h6>
     <h6>{{el.date_pub}}, {{el.location}}</h6>
 </div>
 {% endfor %}

@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block content %}
+
+<h1>Search Results</h1>
+
+<ul>
+  {% for Task in object_list %}
+    <li>
+      {{ Task.city }}, {{ Task.city }}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock content %}

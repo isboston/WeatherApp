@@ -127,6 +127,6 @@ STATICFILES_DIRS = [
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'itvibn@mail.ru'
-EMAIL_HOST_PASSWORD = '*******'
+EMAIL_HOST_PASSWORD = '*password_mail*'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True

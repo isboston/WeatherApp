@@ -80,4 +80,4 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'weather'
         verbose_name_plural = 'weathers'
-        ordering = ['-city']
+        ordering = ['-id']

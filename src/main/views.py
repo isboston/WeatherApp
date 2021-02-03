@@ -4,24 +4,25 @@ from django.contrib.auth import login, logout
 from django.core.mail import send_mail
 from django.contrib import messages
 from src.settings import EMAIL_HOST_USER
-from .models import Task
+from .models import Task, Rainfall
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import TaskListSerializer
+from django.db.models import Q
 
 
 class Search(ListView):
-    paginate_by = 3
+    model = Task
+    template_name = 'task_list.html'
 
     def get_queryset(self):
-        return Task.objects.filter(city__icontains=self.request.GET.get('q'))
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['q'] = self.request.GET.get('q')
-        return context
+        query = self.request.GET.get('q')
+        object_list = Task.objects.filter(
+            Q(city__icontains=query) | Q(temperature__icontains=query)
+        )
+        return object_list
 
 
 def index(request):
@@ -46,7 +47,12 @@ def weather(request):
     form = TaskForm()
     context = {
         'form': form,
-        'error': error
+        'error': error,
+        'snow': Rainfall(type='Snow'),
+        'rain': Rainfall(type='Rain'),
+        'hailstorm': Rainfall(type='Hailstorm'),
+        'frost': Rainfall(type='Frost'),
+        'fog': Rainfall(type='Fog'),
     }
     return render(request, 'main/weather.html', context)
 
