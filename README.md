@@ -1,3 +1,5 @@
+![Site weather app](https://raw.githubusercontent.com/isboston/WeatherApp/main/src/main/static/images/5.png)
+
 # Weather app
 
 My final project - Weather app
