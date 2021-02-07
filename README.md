@@ -1,4 +1,4 @@
-![Site weather app](https://raw.githubusercontent.com/isboston/WeatherApp/main/src/main/static/images/5.png)
+![Site weather app](https://github.com/isboston/WeatherApp/blob/main/src/main/static/images/5.png?raw=true)
 
 # Weather app
 
