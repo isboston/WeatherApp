@@ -5,29 +5,70 @@ Weather app
 {% endblock %}
 
 {% block content %}
-<h1>Latest weather information</h1>
-{% if tasks %}
-{% for el in tasks %}
-<div class="alert alert-warning mt-2">
-    <h3>{{el.city}}</h3>
-    <h4>{{el.temperature}}°</h4>
-    {% if el.rainfall.type == 'Snow' %}
-    <img src="{% static 'images/Snow.png' %}">
-    {% elif el.rainfall.type == 'Rain' %}
-    <img src="{% static 'images/Rain.png' %}">
-    {% elif el.rainfall.type == 'Hailstorm' %}
-    <img src="{% static 'images/Hailstorm.png' %}">
-    {% elif el.rainfall.type == 'Fog' %}
-    <img src="{% static 'images/Fog.png' %}">
-    {% elif el.rainfall.type == 'Frost' %}
-    <img src="{% static 'images/Frost.png' %}">
-    {% endif %}
 
-    <h6>{{el.rainfall}}&nbsp;({{el.strength}})</h6>
-    <h6>{{el.date_pub}}, {{el.location}}</h6>
-</div>
-{% endfor %}
-{% else %}
-<p>There is no information about the weather</p>
-{% endif %}
-{% endblock %}
+<div class="container mt-3">
+    <div class="row ">
+        <div class="col">
+            <h5 align="center">Latest weather update information</h5>
+            <form action="{% url 'search' %}" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for the weather in your city"
+                       name='q'
+                       aria-label="Search">
+            </form>
+            {% if tasks %}
+            {% for el in tasks %}
+            <div class="alert alert-warning mt-3">
+                <h4>{{el.city}}</h4>
+                <div class="row">
+                    <div class="col-9">
+                        <h5>{{el.temperature}}°</h5>
+                        <h6>{{el.rainfall}}&nbsp;({{el.strength}})</h6>
+                    </div>
+                    <div class="col-2 offset-1">
+                        {% if el.rainfall.type == 'Snow' %}
+                        <img src="{% static 'images/Snow.png' %}">
+                        {% elif el.rainfall.type == 'Rain' %}
+                        <img src="{% static 'images/Rain.png' %}">
+                        {% elif el.rainfall.type == 'Hailstorm' %}
+                        <img src="{% static 'images/Hailstorm.png' %}">
+                        {% elif el.rainfall.type == 'Fog' %}
+                        <img src="{% static 'images/Fog.png' %}">
+                        {% elif el.rainfall.type == 'Frost' %}
+                        <img src="{% static 'images/Frost.png' %}">
+                        {% endif %}
+                    </div>
+                </div>
+                <h6>{{el.date_pub}}, {{el.location}}</h6>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <div class="col">
+            <h5 align="center">Information from open sources</h5>
+            <div class="container mt-2">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.name }}
+                    {% for info in all_info %}
+                    <div class="alert alert-success mt-3">
+                        <h4>{{ info.city }}</h4>
+                        <div class="row">
+                            <div class="col-9">
+                                <h5>{{ info.temp }}°</h5>
+                                <h6>Feels like: {{ info.feels_like }}°</h6>
+                            </div>
+                            <div class="col-2 offset-1">
+                                <img src="{% static 'images/Sun.png' %}">
+                            </div>
+                        </div>
+                        <h6>Humidity: {{ info.humidity }}%</h6>
+                    </div>
+                    {% endfor %}
+            </div>
+        </div>
+
+        {% else %}
+        <p>There is no information about the weather</p>
+        {% endif %}
+        {% endblock %}

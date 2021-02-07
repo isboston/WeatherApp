@@ -4,7 +4,9 @@ My final project - Weather app
 
 ## Features
 - sending emails (user verification)
-- information about weather
+- add information about weather
+- search information about weather on the city
+- API
 
 
 ## Installation

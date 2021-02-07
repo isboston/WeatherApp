@@ -1,16 +1,17 @@
-from .forms import TaskForm, UserRegisterForm, UserLoginForm
+from .forms import TaskForm, UserRegisterForm, UserLoginForm, CityForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.core.mail import send_mail
 from django.contrib import messages
 from src.settings import EMAIL_HOST_USER
-from .models import Task, Rainfall
+from .models import Task, Rainfall, City
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import TaskListSerializer
 from django.db.models import Q
+import requests
 
 
 class Search(ListView):
@@ -26,8 +27,37 @@ class Search(ListView):
 
 
 def index(request):
+    appid = '82b797b6ebc625032318e16f1b42c016'
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
+
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        form.save()
+
+    form = CityForm()
     tasks = Task.objects.all()
-    return render(request, 'main/index.html', {'tasks': tasks})
+    cities = City.objects.all()
+    all_cities = []
+
+    for city in cities:
+        res = requests.get(url.format(city.name)).json()
+        city_info = {
+            'city': city.name,
+            'temp': res["main"]["temp"],
+            'icon': res["weather"][0]["icon"],
+            'feels_like': res["main"]["feels_like"],
+            'humidity': res["main"]["humidity"]
+        }
+
+        all_cities.append(city_info)
+
+    context = {
+        'all_info': all_cities,
+        'form': form,
+        'tasks': tasks
+    }
+
+    return render(request, 'main/index.html', context)
 
 
 class About(TemplateView):

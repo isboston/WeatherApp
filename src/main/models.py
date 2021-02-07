@@ -81,3 +81,15 @@ class Task(models.Model):
         verbose_name = 'weather'
         verbose_name_plural = 'weathers'
         ordering = ['-id']
+
+
+class City(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __srt__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'city'
+        verbose_name_plural = 'cities'
+        ordering = ['-id']
