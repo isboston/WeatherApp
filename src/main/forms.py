@@ -6,9 +6,12 @@ from .models import Task, City
 
 class TaskForm(forms.ModelForm):
     city = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control', 'placeholder': 'Please enter the city'}))
+        'class': 'form-control',
+        'placeholder': 'Please enter the city'}))
     temperature = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control', 'placeholder': 'Please enter the temperature'}))
+        'class': 'form-control',
+        'placeholder': 'Please enter the temperature',
+        'size': '20'}))
 
     class Meta:
         model = Task
@@ -27,8 +30,10 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'placeholder': 'Please enter your username or email'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                                 'placeholder': 'Please enter the password'}))
 
 
 class CityForm(forms.ModelForm):
@@ -39,5 +44,5 @@ class CityForm(forms.ModelForm):
             'class': 'form-control',
             'name': 'city',
             'id': 'city',
-            'placeholder': 'Search for weather information from other sites'
+            'placeholder': 'Search for the weather information from other sites'
         })}

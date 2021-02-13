@@ -5,18 +5,25 @@ Information about weather
 {% endblock %}
 
 {% block content %}
-<h2>Add information about the weather</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.city }}<br>
-    {{ form.temperature }}<br>
-    <h6>Choose your region:</h6>
-    {{ form.location }}<br><br>
-    <h6>Choose rainfall:</h6>
-    {{ form.rainfall }}<br><br>
-    <h6>Choose strength rainfall:</h6>
-    {{ form.strength }}<br>
-    <br>
-    <button type="submit" class="btn btn-success">Submit</button>
-</form>
+<div class="container mt-3">
+    <section class="mb-4">
+        <div class='col-6 offset-3'>
+            <h3 align="center">Add information about the weather</h3>
+            <div class="alert alert-info mt-3">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.city }}<br>
+                    {{ form.temperature }}<br>
+                    <h6>Choose your region:</h6>
+                    {{ form.location }}<br><br>
+                    <h6>Choose rainfall:</h6>
+                    {{ form.rainfall }}<br><br>
+                    <h6>Choose strength rainfall:</h6>
+                    {{ form.strength }}<br>
+                    <br>
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </form>
+            </div>
+        </div>
+</div>
 {% endblock %}

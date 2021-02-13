@@ -1,14 +1,26 @@
 {% extends 'main/base.html' %}
-
 {% block title %}
 Registration
 {% endblock %}
 
 {% block content %}
-<h2>Log In</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log In</button>
-</form>
+<div class="container mt-5">
+    <section class="mb-4">
+        <div class='col-6 offset-3'>
+            <h2>Sign In</h2>
+            <p>If you don't have an account yet, please
+                <a href="{% url 'about-us' %}">sign up</a> first.</p>
+            <div class="alert alert-info mt-3">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-success" type="submit">Sign In</button>
+                    <td>
+                        <a class='float-right' href="/">Forgot Password?</a>
+                    </td>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock content %}
